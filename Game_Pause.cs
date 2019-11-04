@@ -58,13 +58,23 @@ public class Game_Pause : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("MainMenu");
+         isPaused = false;
+        Time.timeScale = 1f;
+    }
+
     public void Game_Over()
     {
         isPaused = true;
         game_over_image_menu.SetActive(true);
-       
+        pause_button.SetActive(false);
         Time.timeScale = 0f;
     }
+
+
 
     
 }
