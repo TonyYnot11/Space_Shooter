@@ -13,7 +13,8 @@ public class Scene_Manager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("SpaceShooter");
-
+        
+        Time.timeScale = 1f;
     }
 
     public void Exit()

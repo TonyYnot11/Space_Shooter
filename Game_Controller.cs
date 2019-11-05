@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Game_Controller : MonoBehaviour
 {
-    public GameObject hazard;
+    public GameObject[] hazards;
     public Vector3 Spawn_Values;
     public int Hazard_Count;
     public float Spawn_Wait;
@@ -17,16 +17,16 @@ public class Game_Controller : MonoBehaviour
     private int score;
     private void Start()
     {
-        //lives = 3;
+        
         score = 0;
         Update_Score();
-       StartCoroutine (SpawnWays());
+        StartCoroutine(SpawnWays());
     }
 
 
     private void Update()
     {
-        
+
     }
     IEnumerator SpawnWays()
     {
@@ -38,15 +38,16 @@ public class Game_Controller : MonoBehaviour
 
                 Vector3 Spawn_Position = new Vector3(Random.Range(-Spawn_Values.x, Spawn_Values.x), Spawn_Values.y, Spawn_Values.z);
                 Quaternion Spawn_Rotation = Quaternion.identity;
+                GameObject hazard = hazards[Random.Range(0, hazards.Length)];
                 Instantiate(hazard, Spawn_Position, Spawn_Rotation);
                 yield return new WaitForSeconds(Spawn_Wait);
             }
 
-            yield return new WaitForSeconds(Wave_Wait);
+            yield return new WaitForSeconds(Random.Range(0.5f,Wave_Wait));
         }
 
-        
-        
+
+
     }
 
     public void Add_Score(int newScoreValue)
@@ -55,11 +56,7 @@ public class Game_Controller : MonoBehaviour
         Update_Score();
     }
 
-    //public void Add_Lives(int newlives)
-    //{
-    //    lives += newlives;
-    //    Update_Lives();
-    //}
+
 
 
     void Update_Score()
@@ -67,11 +64,9 @@ public class Game_Controller : MonoBehaviour
         ScoreText.text = "Score: " + score.ToString();
         GameOverScoreText.text = "Score: " + score.ToString();
     }
+}
+
 
 
     
-    //void Update_Lives()
-    //{
-    //    LivesText.text += lives.ToString();
-    //}
-}
+  
